@@ -3,11 +3,17 @@ package org.example;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Player {
     private String name;
     private int age;
     //anno,goal
     private Map<Integer,Integer> goal;
+    private final Map<Integer,Integer> moneyBonus=new HashMap<>();
+
+    private static final int BAD_PLAYER=5;
+    private static final int MEDIUM_PLAYER=10;
+    private static final int BOMBER_PLAYER=20;
 
     public Player(String name, int age, Map<Integer,Integer> goal) {
         this.name = name;
@@ -68,16 +74,31 @@ public class Player {
             int year = entry.getKey();
             int goalsScored = entry.getValue();
 
-            if (goalsScored < 5) {
+            if (goalsScored < BAD_PLAYER) {
                 description.put(year, "bad");
-            } else if (goalsScored < 10) {
+            } else if (goalsScored < MEDIUM_PLAYER) {
                 description.put(year, "medium");
             } else {
                 description.put(year, "bomber");
             }
         }
-
         return description;
+    }
+
+    public void setMoneyBonus(){
+        for (Map.Entry<Integer, String> entry: this.playerDescription().entrySet()) {
+
+            if(entry.getValue()=="bad")
+                moneyBonus.put(entry.getKey(), BAD_PLAYER*1);
+            if(entry.getValue()=="medium")
+                moneyBonus.put(entry.getKey(), MEDIUM_PLAYER*5);
+            if(entry.getValue()=="bomber")
+                moneyBonus.put(entry.getKey(), BOMBER_PLAYER*10);
+        }
+    }
+
+    public Map<Integer, Integer> getMoneyBonus() {
+        return moneyBonus;
     }
 }
 
