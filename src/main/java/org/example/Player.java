@@ -7,32 +7,25 @@ public class Player {
     private String name;
     private int age;
     //anno,goal
-    private Map<Integer,Integer> goal;
+    private Map<Integer,Integer> goal=new HashMap<>();;
 
     public Player(String name, int age, Map<Integer,Integer> goal) {
-        this.name = name;
-        this.age = age;
-        this.goal = goal;
+       setName(name);
+        setAge(age);
+        setGoal(goal);
     }
 
-    public Player(){
-        this.goal = new HashMap<>();
-    }
-
-    // Getter and Setter for name
+    // Getter and Setter
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    // Getter and Setter for age
     public int getAge() {
         return age;
     }
-
     public void setAge(int age) {
         this.age = age;
     }
@@ -40,7 +33,6 @@ public class Player {
     public Map<Integer, Integer> getGoal() {
         return goal;
     }
-
     public void setGoal(Map<Integer, Integer> goal) {
         this.goal = goal;
     }

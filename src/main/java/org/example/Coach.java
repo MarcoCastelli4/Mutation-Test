@@ -1,55 +1,45 @@
 package org.example;
 
-import java.util.Map;
-
 public class Coach {
     private String name;
-    private int experience; // Number of years as a coach
+    private int yearOfExperience; // Number of years as a coach
 
     public Coach(String name, int experience) {
-        this.name = name;
-        this.experience = experience;
+        setName(name);
+        setYearOfExperience(experience);
     }
 
-    public Coach(){
-
-    }
-
-        // Getter and Setter for name
+    // Getter and Setter
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
-
-    // Getter and Setter for experience
-    public int getExperience() {
-        return experience;
+    public int getYearOfExperience() {
+        return yearOfExperience;
     }
-
-    public void setExperience(int experience) {
-        this.experience = experience;
+    public void setYearOfExperience(int yearOfExperience) {
+        this.yearOfExperience = yearOfExperience;
     }
 
     @Override
     public String toString() {
         return "Coach{" +
                 "name='" + name + '\'' +
-                ", experience=" + experience +
+                ", experience=" + yearOfExperience +
                 '}';
     }
 
     public String experienceDescription() {
-        if (this.experience >= 1 && this.experience < 5)
+        if (this.yearOfExperience >= 1 && this.yearOfExperience < 5)
             return "Experience LOW";
-        if (this.experience > 5 && this.experience < 10)
+        if (this.yearOfExperience >= 5 && this.yearOfExperience < 10)
             return "Experience MEDIUM";
-        if (this.experience > 10)
+        if (this.yearOfExperience >= 10)
             return "Experience HIGH";
 
-        return "Experience NULL";
+        return "No Experience";
     }
 }
