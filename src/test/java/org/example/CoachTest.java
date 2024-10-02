@@ -32,10 +32,12 @@ class CoachTest {
     }
 
     @Test
-    void testExperience(){
-        assertEquals("Experience HIGH",coach.experienceDescription());
+    void testNullExperienceDescription() {
+        coach.setYearOfExperience(0);
+        assertEquals("No Experience", coach.experienceDescription());
+
     }
-    /*
+
     @Test
     void testLowExperienceDescription() {
         coach.setYearOfExperience(1);
@@ -47,9 +49,6 @@ class CoachTest {
         coach.setYearOfExperience(5);
         assertEquals("Experience MEDIUM", coach.experienceDescription());
 
-        coach.setYearOfExperience(8);
-        assertEquals("Experience MEDIUM", coach.experienceDescription());
-
         coach.setYearOfExperience(9);
         assertEquals("Experience MEDIUM", coach.experienceDescription());
     }
@@ -58,15 +57,7 @@ class CoachTest {
     void testHighExperienceDescription() {
         coach.setYearOfExperience(10);
         assertEquals("Experience HIGH", coach.experienceDescription());
-
-        coach.setYearOfExperience(15);
-        assertEquals("Experience HIGH", coach.experienceDescription());
     }
 
-    @Test
-    void testNullExperienceDescription() {
-        coach.setYearOfExperience(0);
-        assertEquals("No Experience", coach.experienceDescription());
 
-    }*/
 }
