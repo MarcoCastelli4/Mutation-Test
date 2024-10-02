@@ -1,17 +1,40 @@
 package org.example;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlayerTest {
 
     private Player player;
+    private Map<Integer, Integer> goalMap;
 
     @BeforeEach
-    public void setUp() {
-
+    void setUp() {
+        goalMap = new HashMap<>();
+        goalMap.put(2023, 10);
+        goalMap.put(2024, 2);
+        goalMap.put(2025, 0);
+        player = new Player("Cristiano Ronaldo", 36, goalMap);
     }
+
+    @Test
+    void testPlayerInitialization() {
+        assertEquals("Cristiano Ronaldo", player.getName());
+        assertEquals(36, player.getAge());
+        assertEquals(goalMap, player.getGoal());
+    }
+
+    @Test
+    void testToString() {
+        String expected = "Player{name='Cristiano Ronaldo', age=36, goals=" + goalMap.toString() + "}";
+        assertEquals(expected, player.toString());
+    }
+
 
     /*
     @Test

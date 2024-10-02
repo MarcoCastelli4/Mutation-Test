@@ -11,8 +11,8 @@ public class Player {
 
     public Player(String name, int age, Map<Integer,Integer> goal) {
        setName(name);
-        setAge(age);
-        setGoal(goal);
+       setAge(age);
+       setGoal(goal);
     }
 
     // Getter and Setter
@@ -41,17 +41,10 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
+                ", age=" + age + ", goals=" +
+                getGoal().toString()+'}';
     }
 
-    public String printGoal(){
-        String res="";
-        for (Integer year:goal.keySet()){
-            res+=year+":"+goal.get(year)+"\n";
-        }
-        return res;
-    }
 
     public Map<Integer, String> playerDescription() {
         Map<Integer, String> description = new HashMap<>();
