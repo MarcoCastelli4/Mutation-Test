@@ -17,7 +17,7 @@ public class PlayerTest {
     private Map<Integer, Integer> goalMap;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         Assertions.assertNotNull(player.getGoal());
         goalMap=new HashMap<>();
         goalMap.put(2023, 4); //bad
@@ -28,7 +28,7 @@ public class PlayerTest {
     }
 
     @Test
-    void testPlayerInitialization() {
+    public void testPlayerInitialization() {
         assertEquals("Cristiano Ronaldo", player.getName());
         assertEquals(36, player.getAge());
         assertEquals(goalMap, player.getGoal());
@@ -36,7 +36,7 @@ public class PlayerTest {
     }
 
     @Test
-    void testToString() {
+    public void testToString() {
         String expected = "Player{name='Cristiano Ronaldo', age=36, goals=" + goalMap.toString() + "}";
         assertEquals(expected, player.toString());
     }

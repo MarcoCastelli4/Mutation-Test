@@ -43,14 +43,14 @@ public class Team {
         return coach;
     }
 
-    public void setGoalConceded(Map<Integer, Integer> goal) {
+    public void setGoalConceded(Map<Integer, Integer> goalConceded) {
         this.goalConceded = goalConceded;
     }
     public Map<Integer, Integer> getGoalConceded() {
         return goalConceded;
     }
 
-    public int getGoal(int year){
+    public int getTotalGoal(int year){
         int res=0;
         for (Player player : players) {
             res+=player.getGoal().get(year);
@@ -60,7 +60,7 @@ public class Team {
 
     // A good team in a year is good if score goal respect conceded
     public boolean isAGoodYear(int fromYear){
-        return goalConceded.get(fromYear)<getGoal(fromYear);
+        return goalConceded.get(fromYear)<getTotalGoal(fromYear);
     }
 
     public void updateGoalConceded(int year,int goal){
@@ -74,8 +74,7 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team{" +
-                "teamName='" + teamName + '\'' +
+        return "Team{teamName=" + teamName + '\'' +
                 ", players=" + players +
                 ", coach=" + coach +
                 '}';

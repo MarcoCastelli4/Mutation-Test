@@ -1,19 +1,23 @@
 package org.example;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class TeamTest {
 
     private Team team;
     private Coach coach;
     private List<Player> players;
+    Map<Integer, Integer> goalConceded;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         // Creazione di un coach
         coach = new Coach("Sir Alex Ferguson",1);
 
@@ -22,20 +26,39 @@ class TeamTest {
         Map<Integer, Integer> goalsPlayer1 = new HashMap<>();
         goalsPlayer1.put(2022, 10);
         goalsPlayer1.put(2023, 11);
-        players.add(new Player("Cristiano Ronaldo", 25, goalsPlayer1));
+        players.add(new Player("Cristiano Ronaldo", 36, goalsPlayer1));
 
         Map<Integer, Integer> goalsPlayer2 = new HashMap<>();
         goalsPlayer2.put(2022, 15);
         goalsPlayer2.put(2023, 15);
-        players.add(new Player("Marco Castelli", 24, goalsPlayer2));
+        players.add(new Player("Lionel Messi", 36, goalsPlayer2));
 
         // Mappa delle goal concessi
-        Map<Integer, Integer> goalConceded = new HashMap<>();
+        goalConceded = new HashMap<>();
         goalConceded.put(2022, 20);
         goalConceded.put(2023, 30);
 
         // Inizializzazione del team
-        team = new Team("MyTeam", players, coach, goalConceded);
+        team = new Team("Dream team", players, coach, goalConceded);
+    }
+    @Test
+    public void testPlayerInitialization() {
+        assertEquals("Dream team", team.getTeamName());
+        assertEquals(players, team.getPlayers());
+        assertEquals(coach, team.getCoach());
+        assertEquals(goalConceded,team.getGoalConceded());
+    }
+
+    @Test
+    public void testToString() {
+        String expected = "Team{teamName=Dream team', players=[Player{name='Cristiano Ronaldo', age=36, goals={2022=10, 2023=11}}, Player{name='Lionel Messi', age=36, goals={2022=15, 2023=15}}], coach=Coach{name='Sir Alex Ferguson', experience=1}}";
+        assertEquals(expected, team.toString());
+    }
+
+    @Test
+    public void testGetTotalGoal(){
+        assertEquals(25,team.getTotalGoal(2022));
+        assertEquals(26,team.getTotalGoal(2023));
     }
     /*
 
