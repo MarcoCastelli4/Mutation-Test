@@ -7,15 +7,20 @@ import java.util.Map;
 
 public class Team {
     private String teamName;
-    private List<Player> players=new ArrayList<>();;
+    private List<Player> players;
     private Coach coach; // New field for the coach
-    private Map<Integer,Integer> goalConceded=new HashMap<>();;
+    private Map<Integer,Integer> goalConceded;
 
     public Team(String teamName, List<Player> players, Coach coach, Map<Integer,Integer> goalConceded) {
         setTeamName(teamName);
         setPlayers(players);
         setCoach(coach);
         setGoalConceded(goalConceded);
+    }
+
+    public Team(){
+        players=new ArrayList<>();
+        goalConceded=new HashMap<>();
     }
 
     // Getter and setter
@@ -53,7 +58,9 @@ public class Team {
     public int getTotalGoal(int year){
         int res=0;
         for (Player player : players) {
-            res+=player.getGoal().get(year);
+            if(player.getGoal().get(year)!=null){
+                res+=player.getGoal().get(year);
+            }
         }
         return res;
     }

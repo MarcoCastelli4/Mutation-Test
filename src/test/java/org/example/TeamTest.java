@@ -1,4 +1,5 @@
 package org.example;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TeamTest {
@@ -31,12 +33,14 @@ class TeamTest {
         Map<Integer, Integer> goalsPlayer2 = new HashMap<>();
         goalsPlayer2.put(2022, 15);
         goalsPlayer2.put(2023, 15);
+        goalsPlayer2.put(2024, 0);
         players.add(new Player("Lionel Messi", 36, goalsPlayer2));
 
         // Mappa delle goal concessi
         goalConceded = new HashMap<>();
         goalConceded.put(2022, 20);
         goalConceded.put(2023, 30);
+        goalConceded.put(2024,0);
 
         // Inizializzazione del team
         team = new Team("Dream team", players, coach, goalConceded);
@@ -50,8 +54,14 @@ class TeamTest {
     }
 
     @Test
+    public void emptyCostructor(){
+        Team t=new Team();
+        Assertions.assertNotNull(t.getGoalConceded());
+        Assertions.assertNotNull(t.getPlayers());
+    }
+    @Test
     public void testToString() {
-        String expected = "Team{teamName=Dream team', players=[Player{name='Cristiano Ronaldo', age=36, goals={2022=10, 2023=11}}, Player{name='Lionel Messi', age=36, goals={2022=15, 2023=15}}], coach=Coach{name='Sir Alex Ferguson', experience=1}}";
+        String expected = "Team{teamName=Dream team', players=[Player{name='Cristiano Ronaldo', age=36, goals={2022=10, 2023=11}}, Player{name='Lionel Messi', age=36, goals={2022=15, 2023=15, 2024=0}}], coach=Coach{name='Sir Alex Ferguson', experience=1}}";
         assertEquals(expected, team.toString());
     }
 
@@ -59,6 +69,60 @@ class TeamTest {
     public void testGetTotalGoal(){
         assertEquals(25,team.getTotalGoal(2022));
         assertEquals(26,team.getTotalGoal(2023));
+    }
+
+    @Test
+    public void testAddPlayer() {
+        Player test=new Player("Zlatan Ibrahimovic",40,new HashMap<>());
+        // Aggiungi il giocatore al team
+        team.addPlayer(test);
+        // Verifica che il giocatore sia stato aggiunto correttamente
+        Assertions.assertTrue(team.getPlayers().contains(test));
+    }
+
+
+    @Test
+    public void testIsAGoodYear(){
+        Assertions.assertTrue(team.isAGoodYear(2022));
+        Assertions.assertFalse(team.isAGoodYear(2023));
+        Assertions.assertFalse(team.isAGoodYear(2024));
+    }
+
+    @Test
+    public void testUpdateGoalConceded(){
+        HashMap<Integer, Integer> goalConceded = new HashMap<>();
+        goalConceded.put(2022, 20);
+        goalConceded.put(2023, 40);
+        goalConceded.put(2024, 0);
+        team.updateGoalConceded(2023,40);
+        assertEquals(goalConceded,team.getGoalConceded());
+    }
+
+    @Test
+    public void testTheCoachIsGood(){
+        coach = new Coach("Thiago Motta",1);
+
+        // Creazione di una lista di giocatori
+        players = new ArrayList<>();
+        Map<Integer, Integer> goalsPlayer1 = new HashMap<>();
+        goalsPlayer1.put(2022, 10);
+        goalsPlayer1.put(2023, 15);
+        goalsPlayer1.put(2024, 9);
+
+        players.add(new Player("Dusan Vlahovic", 24, goalsPlayer1));
+
+        // Mappa delle goal concessi
+        goalConceded = new HashMap<>();
+        goalConceded.put(2022, 5);
+        goalConceded.put(2023, 10);
+        goalConceded.put(2024,10);
+        goalConceded.put(2025,9);
+        // Inizializzazione del team
+        team = new Team("Juventus", players, coach, goalConceded);
+
+        Assertions.assertTrue(team.theCoachIsGood(2022));
+        Assertions.assertFalse(team.theCoachIsGood(2023));
+        Assertions.assertFalse(team.theCoachIsGood(2025));
     }
     /*
 
