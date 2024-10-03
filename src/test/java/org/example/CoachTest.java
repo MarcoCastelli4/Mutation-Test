@@ -10,42 +10,42 @@ class CoachTest {
     private Coach coach;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         coach = new Coach("Sir Alex Ferguson", 20);
     }
 
     @Test
-    void testSetName() {
+    public void testSetName() {
         assertEquals("Sir Alex Ferguson", coach.getName());
     }
 
     @Test
-    void testSetYearOfExperience() {
+    public void testSetYearOfExperience() {
         assertEquals(20, coach.getYearOfExperience());
     }
 
     @Test
-    void testToString() {
+    public void testToString() {
         String result = coach.toString();
         String expected = "Coach{name='Sir Alex Ferguson', experience=20}";
         assertEquals(expected, result);
     }
 
     @Test
-    void testNullExperienceDescription() {
+    public void testNullExperienceDescription() {
         coach.setYearOfExperience(0);
         assertEquals("No Experience", coach.experienceDescription());
 
     }
 
     @Test
-    void testLowExperienceDescription() {
+    public void testLowExperienceDescription() {
         coach.setYearOfExperience(1);
         assertEquals("Experience LOW", coach.experienceDescription());
     }
 
     @Test
-    void testMediumExperienceDescription() {
+    public void testMediumExperienceDescription() {
         coach.setYearOfExperience(5);
         assertEquals("Experience MEDIUM", coach.experienceDescription());
 
@@ -54,7 +54,7 @@ class CoachTest {
     }
 
     @Test
-    void testHighExperienceDescription() {
+    public void testHighExperienceDescription() {
         coach.setYearOfExperience(10);
         assertEquals("Experience HIGH", coach.experienceDescription());
     }

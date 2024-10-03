@@ -7,7 +7,11 @@ public class Player {
     private String name;
     private int age;
     //anno,goal
-    private Map<Integer,Integer> goal=new HashMap<>();;
+    private Map<Integer,Integer> goal;
+
+    private static final int BAD_PLAYER=5;
+    private static final int MEDIUM_PLAYER=10;
+    private static final int BOMBER_PLAYER=20;
 
     public Player(String name, int age, Map<Integer,Integer> goal) {
        setName(name);
@@ -15,6 +19,7 @@ public class Player {
        setGoal(goal);
     }
 
+    public Player(){goal=new HashMap<>();}
     // Getter and Setter
     public String getName() {
         return name;
@@ -64,5 +69,29 @@ public class Player {
 
         return description;
     }
+
+    public Map<Integer, Integer> getMoneyBonus() {
+        Map<Integer, Integer> moneyBonus = new HashMap<>();
+
+        for (Map.Entry<Integer, String> entry : this.playerDescription().entrySet()) {
+            switch (entry.getValue()) {
+                case "bad":
+                    moneyBonus.put(entry.getKey(), BAD_PLAYER * 1);
+                    break;
+                case "medium":
+                    moneyBonus.put(entry.getKey(), MEDIUM_PLAYER * 5);
+                    break;
+                case "bomber":
+                    moneyBonus.put(entry.getKey(), BOMBER_PLAYER * 10);
+                    break;
+                default:
+                    // Handle cases where entry.getValue() is not "bad", "medium", or "bomber"
+                    break;
+            }
+        }
+
+        return moneyBonus;
+    }
+
 }
 

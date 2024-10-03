@@ -1,24 +1,29 @@
 package org.example;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 public class PlayerTest {
 
-    private Player player;
+    private Player player=new Player();
     private Map<Integer, Integer> goalMap;
 
     @BeforeEach
     void setUp() {
-        goalMap = new HashMap<>();
-        goalMap.put(2023, 10);
-        goalMap.put(2024, 2);
-        goalMap.put(2025, 0);
+        Assertions.assertNotNull(player.getGoal());
+        goalMap=new HashMap<>();
+        goalMap.put(2023, 4); //bad
+        goalMap.put(2024, 5); //medium
+        goalMap.put(2025, 9); //medium
+        goalMap.put(2026, 10); //bomber
         player = new Player("Cristiano Ronaldo", 36, goalMap);
     }
 
@@ -27,6 +32,7 @@ public class PlayerTest {
         assertEquals("Cristiano Ronaldo", player.getName());
         assertEquals(36, player.getAge());
         assertEquals(goalMap, player.getGoal());
+
     }
 
     @Test
@@ -35,61 +41,29 @@ public class PlayerTest {
         assertEquals(expected, player.toString());
     }
 
-
-    /*
     @Test
-    public void testPlayerDescription_BadPerformance() {
-        // Player scores fewer than 5 goals in a year
-        Map<Integer, Integer> goals = new HashMap<>();
-        goals.put(2020, 3); // bad
-        player.setGoal(goals);
+    public void testPlayerDescription() {
+
+        player.setGoal(goalMap);
 
         Map<Integer, String> expectedDescription = new HashMap<>();
-        expectedDescription.put(2020, "bad");
-
+        expectedDescription.put(2023, "bad");
+        expectedDescription.put(2024, "medium");
+        expectedDescription.put(2025, "medium");
+        expectedDescription.put(2026, "bomber");
         assertEquals(expectedDescription, player.playerDescription());
     }
 
+
     @Test
-    public void testPlayerDescription_MediumPerformance() {
-        // Player scores between 5 and 9 goals in a year
-        Map<Integer, Integer> goals = new HashMap<>();
-        goals.put(2021, 7); // medium
-        player.setGoal(goals);
-
-        Map<Integer, String> expectedDescription = new HashMap<>();
-        expectedDescription.put(2021, "medium");
-
-        assertEquals(expectedDescription, player.playerDescription());
+    public void testMoneyBonus() {
+        Map<Integer, Integer> expectedBonus = new HashMap<>();
+        expectedBonus.put(2023, 5);
+        expectedBonus.put(2024, 50);
+        expectedBonus.put(2025, 50);
+        expectedBonus.put(2026, 200);
+        assertEquals(expectedBonus, player.getMoneyBonus());
     }
 
-    @Test
-    public void testPlayerDescription_BomberPerformance() {
-        // Player scores 10 or more goals in a year
-        Map<Integer, Integer> goals = new HashMap<>();
-        goals.put(2022, 12); // bomber
-        player.setGoal(goals);
 
-        Map<Integer, String> expectedDescription = new HashMap<>();
-        expectedDescription.put(2022, "bomber");
-
-        assertEquals(expectedDescription, player.playerDescription());
-    }
-
-    @Test
-    public void testPlayerDescription_MixedPerformance() {
-        // Player scores different amounts in different years
-        Map<Integer, Integer> goals = new HashMap<>();
-        goals.put(2020, 3);  // bad
-        goals.put(2021, 6);  // medium
-        goals.put(2022, 15); // bomber
-        player.setGoal(goals);
-
-        Map<Integer, String> expectedDescription = new HashMap<>();
-        expectedDescription.put(2020, "bad");
-        expectedDescription.put(2021, "medium");
-        expectedDescription.put(2022, "bomber");
-
-        assertEquals(expectedDescription, player.playerDescription());
-    }*/
 }
